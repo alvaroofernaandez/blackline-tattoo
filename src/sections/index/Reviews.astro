@@ -1,0 +1,53 @@
+---
+import CardReview from "../../components/general/CardReview.astro";
+
+const reviews = [
+  {
+    id: 1,
+    title: "Laura Méndez",
+    description: "Una experiencia increíble desde el principio hasta el final. El equipo es excepcional y la atención al detalle es impresionante. ¡No podría estar más feliz con mi tatuaje!",
+    rating: 5,
+    href: "https://g.co/kgs/example1",
+    },
+    {
+    id: 2,
+    title: "Carlos Ruiz",
+    description: "El estudio es muy acogedor y el equipo es súper profesional. Entendieron perfectamente lo que quería y el resultado fue mejor de lo que imaginaba. ¡Recomendado al 100%!",
+    rating: 5,
+    href: "https://g.co/kgs/example2",
+    },
+    {
+    id: 3,
+    title: "Sofía López",
+    description: "Me encantó el diseño personalizado que crearon para mí. Su paciencia y dedicación son inigualables. Definitivamente volveré para mi próximo tatuaje.",
+    rating: 5,
+    href: "https://g.co/kgs/example3",
+    },
+    {
+    id: 4,
+    title: "Javier Martín",
+    description: "El mejor lugar para tatuarse en Córdoba. Son verdaderos profesionales y su trabajo es impecable. ¡Gracias por hacer mi idea realidad!",
+    rating: 5,
+    href: "https://g.co/kgs/example4",
+    },
+];
+---
+
+<section class=" mb-20 bg-gradient-to-b from-transparent via-neutral-900/50 to-transparent text-white py-10 rounded-lg">
+  <div class="grid gap-5 text-center">
+    <h1 class="text-3xl lg:text-6xl font-extrabold mt-10 titleMarta">
+      <span class="text-neutral-400">Lo que dicen</span> nuestros clientes
+    </h1>
+    <p class="text-neutral-200 max-w-[80%] mx-auto md:text-base lg:text-lg">
+      Aquí puedes ver lo que nuestros clientes dicen sobre los servicios en Tattoo Studio. 
+      <br />
+      ¡No olvides dejar tu reseña!
+    </p>
+  </div> 
+  
+  <div class="flex gap-5 flex-wrap justify-center mt-20">
+    {reviews.map((review) => (
+      <CardReview key={review.id} title={review.title} description={review.description} rating={review.rating} href={review.href} />
+    ))}
+  </div>
+</section>

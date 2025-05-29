@@ -1,0 +1,13 @@
+---
+import AuthGuard from '../../components/auth/AuthGuard';
+import SorteosApuntarseForm from '../../components/sorteos/SorteosApuntarseForm';
+import Layout from '../../layouts/Layout.astro';
+export const prerender = false;
+
+const { id } = Astro.params;
+---
+
+<Layout title='Apuntarse al Sorteo'>
+  <AuthGuard client:only="react" server:defer/>
+  <SorteosApuntarseForm id={id} client:only="react" server:defer />
+</Layout>

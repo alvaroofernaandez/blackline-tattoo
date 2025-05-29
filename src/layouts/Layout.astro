@@ -1,0 +1,46 @@
+---
+import { Toaster } from 'sonner';
+import Footer from '../components/general/Footer.astro';
+import Header from '../components/general/Header';
+import '../styles/global.css'
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Maez Ink - Blackwork - Anime Tattoo. Arte y diseño de tatuajes personalizados y de alta calidad." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Maez Ink" />
+    <meta name="keywords" content="Maez Ink, Tatuajes, Blackwork, Anime Tattoo, Arte, Diseño, Personalización, Alta Calidad, Tatuajes Personalizados" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Maez Ink - Blackwork - Anime Tattoo. Arte y diseño de tatuajes personalizados y de alta calidad." />
+    <meta property="og:image" content="/logo.avif" />
+    <meta property="og:url" content="https://tattoostudio.es" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Maez Ink - Blackwork - Anime Tattoo. Arte y diseño de tatuajes personalizados y de alta calidad." />
+    <meta name="twitter:image" content="/logo.avif" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/Inter-VariableFont_opsz,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="canonical" href="https://tattoostudio.es" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Tattoo Studio - {title}</title>
+  </head>
+
+  <body class="bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-800 overflow-x-hidden grid min-h-screen grid-rows-[auto_1fr_auto] text-white">
+    <Header client:only="react"/>
+    <main>
+      <slot />
+      <Toaster position='bottom-right' richColors style={{ marginBottom: '150px' }} client:visible/>
+    </main>
+    <Footer/>
+  </body>  
+</html>
