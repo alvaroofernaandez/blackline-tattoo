@@ -43,7 +43,7 @@ export function useAuth() {
     try {
       registerSchema.parse(formData);
 
-      const response = await fetch('http://localhost:8000/api/usuarios/', {
+      const response = await fetch('/api/usuarios/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -58,7 +58,7 @@ export function useAuth() {
 
       await response.json();
 
-      const tokenResponse = await fetch('http://localhost:8000/api/token/', {
+      const tokenResponse = await fetch('/api/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -88,7 +88,7 @@ export function useAuth() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/api/token/', {
+      const response = await fetch('/api/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -111,7 +111,7 @@ export function useAuth() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/api/change_password/', {
+      const response = await fetch('/api/change_password/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -135,7 +135,7 @@ export function useAuth() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8000/api/modificar_contrasena/', {
+      const response = await fetch('/api/modificar_contrasena/', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nueva_contrasena: formData.password, token }),
@@ -150,7 +150,7 @@ export function useAuth() {
 
   const changeEmailPreference = async (user) => {
     try {
-      const response = await fetch('http://localhost:8000/api/modificar_recibir_correos/', {
+      const response = await fetch('/api/modificar_recibir_correos/', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: user.id, can_receive_emails: !user.can_receive_emails }),
@@ -165,7 +165,7 @@ export function useAuth() {
 
   const changeInstagramUsername = async (user, newInstagramUsername, closeModal) => {
     try {
-      const response = await fetch('http://localhost:8000/api/modificar_nombre_instagram/', {
+      const response = await fetch('/api/modificar_nombre_instagram/', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: user.id, instagram_username: newInstagramUsername }),

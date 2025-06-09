@@ -17,12 +17,12 @@ export const useDiseños = () => {
   const [designs, setDesigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/diseños/', {
+        const response = await fetch('/api/diseños/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

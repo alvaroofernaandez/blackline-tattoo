@@ -20,13 +20,8 @@ export function useNoticias() {
   const fetchNoticias = useCallback(async () => {
     setCargando(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/noticias", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-      });
+      const res = await fetch("/api/noticias/");
+      if (!res.ok) throw new Error("No autorizado o error en el servidor");
       const raw = await res.json();
       const validadas = raw.map((n) => noticiaSchema.parse(n));
       if (validadas.length === 0) {

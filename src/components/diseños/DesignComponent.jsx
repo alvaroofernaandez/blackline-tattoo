@@ -1,15 +1,17 @@
 import CardDiseños from './CardDiseños.jsx';
 import { useDiseños } from '../../hooks/useDiseños';
+import { toast } from 'sonner';
 
 const DesignComponent = () => {
-  const { designs, loading, error, hasMore, handleLoadMore } = useDiseños();
+  const { designs, error, hasMore, handleLoadMore } = useDiseños();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) {
+    toast.error('Error al cargar los diseños');
+  }
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in-right">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in-right mb-20">
         {designs.map((design) => (
           <CardDiseños
             key={design.id}

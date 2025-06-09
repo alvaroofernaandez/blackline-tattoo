@@ -66,7 +66,7 @@ const removeCookie = (name: string): void => {
 
 const fetchUserDetailsById = async (id: number, token: string) => {
   try {
-    const res = await fetch(`http://localhost:8000/api/usuario_por_id/${id}`, {
+    const res = await fetch(`/api/usuario_por_id/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

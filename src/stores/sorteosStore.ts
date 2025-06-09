@@ -28,7 +28,7 @@ export const useSorteosStore = create<SorteosState>((set) => ({
   sorteosActivos: [],
   fetchSorteos: async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/sorteos/", {
+      const response = await fetch("/api/sorteos/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

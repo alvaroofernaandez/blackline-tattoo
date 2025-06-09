@@ -8,21 +8,12 @@ export function useDiseñosModal(isOpen) {
   useEffect(() => {
     if (!isOpen) return;
     const fetchData = async () => {
-      const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("accessToken="))
-        ?.split("=")[1];
-      if (!token) {
-        console.log("Token no encontrado");
-        return;
-      }
       try {
-        const response = await fetch('http://localhost:8000/api/diseños/', {
+        const response = await fetch('/api/diseños/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`,
           },
         });
         if (!response.ok) throw new Error('Error al obtener los diseños');
@@ -76,7 +67,7 @@ export function useFormPideCita({ user, token, initialDesign }) {
   }, []);
 
   const fetchTramosHorarios = useCallback(async (selectedDate) => {
-    const res = await fetch(`http://localhost:8000/api/citas_tramo_horario/?fecha=${selectedDate}`, {
+    const res = await fetch(`/api/citas_tramo_horario/?fecha=${selectedDate}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -137,7 +128,7 @@ export function useFormPideCita({ user, token, initialDesign }) {
         .find((row) => row.startsWith("accessToken="))
         ?.split("=")[1];
       if (!tokenCookie) throw new Error("Token no encontrado");
-      const res = await fetch("http://localhost:8000/api/enviar_correos_personalizados/", {
+      const res = await fetch("/api/enviar_correos_personalizados/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -170,7 +161,7 @@ export function useFormPideCita({ user, token, initialDesign }) {
       descripcion: formData.notes,
     };
     try {
-      const res = await fetch('http://localhost:8000/api/citas/', {
+      const res = await fetch('/api/citas/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

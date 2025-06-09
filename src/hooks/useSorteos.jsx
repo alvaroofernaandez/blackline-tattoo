@@ -48,7 +48,7 @@ export function useSorteosApuntarse({ id }) {
 
       if (!instagramUsernameFromToken) {
         const patchResponse = await fetch(
-          `http://127.0.0.1:8000/api/modificar_nombre_instagram/`,
+          `/api/modificar_nombre_instagram/`,
           {
             method: 'PATCH',
             headers: {
@@ -68,7 +68,7 @@ export function useSorteosApuntarse({ id }) {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/participantes_por_sorteo/${id}/`,
+        `/api/sorteos/${id}/`,
         {
           method: 'POST',
           headers: {
