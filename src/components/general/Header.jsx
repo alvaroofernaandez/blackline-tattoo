@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="fixed z-20 flex justify-between md:justify-center items-center w-full">
-      <div className="bg-red-900 flex items-center md:justify-center gap-3 border-b border-b-neutral-600 w-screen h-24 backdrop-blur bg-opacity-30">
+      <div className="bg-neutral-900 flex items-center md:justify-center gap-3 border-b border-b-neutral-600 w-screen h-24 backdrop-blur bg-opacity-30">
         <button
           className="text-white text-2xl md:hidden ml-2 p-2"
           onClick={handleMobileMenuToggle}
