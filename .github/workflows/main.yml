@@ -1,6 +1,6 @@
-name: Deploy blackline-tattoo 
+name: Deploy blackline-tattoo
 
-on: 
+on:
   push:
     branches:
       - main
@@ -10,28 +10,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Usar Node.js 18.20.8
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.20.8
+
       - name: Configuración de SSH
         env:
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            SERVER_USER: ${{ secrets.SERVER_USER }}
-            SERVER_IP: ${{ secrets.IP_SERVER }}  
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.IP_SERVER }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
           ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "echo '✅ Conectado al servidor correctamente'"
+
       - name: Actualizar el servidor
         env:
-            SERVER_USER: ${{ secrets.SERVER_USER }}
-            SERVER_IP: ${{ secrets.IP_SERVER }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.IP_SERVER }}
         run: |
           ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << 'EOF'
-            cd /var/www/blackline-tattoo/
-            "⚒️Nos traemos los cambios"
-            git pull
-            "⚙️Hacemos el build"
-            npm run build
-            "🌐Reiniciamos el servicio"
-            systemctl restart blackline-tattoo
+            bash -i -c '
+              echo "📁 Entramos al proyecto"
+              cd /var/www/blackline-tattoo/ || { echo "❌ No se pudo acceder al directorio"; exit 1; }
+          
+              echo "⚒️ Nos traemos los cambios"
+              git pull || { echo "❌ git pull falló"; exit 1; }
+          
+          
+              echo "⚙️ Hacemos el build"
+              npm run build || { echo "❌ npm run build falló"; exit 1; }
+          
+              echo "🛑 Detenemos el servicio"
+              systemctl stop blackline-tattoo || { echo "❌ Error al detener el servicio"; exit 1; }
+          
+              echo "⏳ Esperamos unos segundos..."          
+              echo "✅ Iniciamos el servicio"
+              systemctl start blackline-tattoo || { echo "❌ Error al iniciar el servicio"; exit 1; }
+          
+              echo "📋 Estado del servicio:"
+              systemctl status blackline-tattoo --no-pager || true
+            '
           EOF
+
+
