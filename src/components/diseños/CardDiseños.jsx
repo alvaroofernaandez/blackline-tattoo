@@ -1,6 +1,6 @@
 const CardDiseños = ({ id, title, description, price, size, time, imageUrl }) => {
     return (
-        <div className="rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden w-full max-w-xs text-white border border-neutral-700">
+        <div className="rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden w-full max-w-xs text-white border border-neutral-700 animate-fade-in-up">
             <div className="h-[200px] w-full overflow-hidden">
                 <img
                     src={imageUrl}

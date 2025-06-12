@@ -22,7 +22,7 @@ const Noticiero = () => {
             <h1 className='text-4xl text-white font-bold text-center lg:text-start'>Noticias</h1>
             <hr/>
             {cargando ? (
-                <span className="text-white">Cargando...</span>
+                <span className="text-neutral-500 m-3 text-center">Cargando...</span>
             ) : (
                 noticiasPaginadas.map(noticia => (
                     <Noticia
